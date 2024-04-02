@@ -1,0 +1,219 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+  binaryTargets   = ["native", "linux-musl"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id                         Int       @id @default(autoincrement())
+  userId                     String    @map("user_id") @db.Uuid
+  walletId                   String?   @map("wallet_id") @db.VarChar(255)
+  isConnected                Boolean   @default(true) @map("is_connected")
+  status                     String    @map("status") @db.VarChar(100)
+  title                      String?   @map("title") @db.VarChar(255)
+  externalName               String?   @map("external_name") @db.VarChar(1024)
+  internalName               String?   @map("internal_name") @db.VarChar(1024)
+  doorCode                   String?   @map("door_code") @db.VarChar(100)
+  keyPickup                  String?   @map("key_pickup") @db.VarChar(1024)
+  starRating                 Float?    @map("star_rating")
+  description                String?   @map("description") @db.Text
+  propertyTypeId             Int?      @map("property_type_id")
+  propertyTypeName           String?   @map("property_type_name") @db.VarChar(255)
+  roomType                   String?   @map("room_type") @db.VarChar(255)
+  bathRoomType               String?   @map("bath_room_type") @db.VarChar(255)
+  defaultCheckInTime         String?   @map("default_check_in_time") @db.VarChar(50)
+  defaultCheckOutTime        String?   @map("default_check_out_time") @db.VarChar(50)
+  checkinType                String?   @map("checkin_type") @db.VarChar(255)
+  checkinInstruction         String?   @map("checkin_instruction") @db.Text
+  houseRules                 String?   @map("house_rules") @db.Text
+  personCapacity             Int?      @map("person_capacity") @db.Integer
+  guestsIncluded             Int?      @map("guest_included") @db.Integer
+  bedrooms                   Int?      @map("bedrooms") @db.Integer
+  beds                       Int?      @map("beds") @db.Integer
+  bathrooms                  Float?    @map("bathrooms")
+  maxChildren                Int?      @map("max_children") @db.Integer
+  maxInfant                  Int?      @map("max_infant") @db.Integer
+  maxPet                     Int?      @map("max_pet") @db.Integer
+  minNights                  Int?      @map("min_nights") @db.Integer
+  maxNights                  Int?      @map("max_nights") @db.Integer
+  address                    Json?     @map("address") @db.JsonB
+  pictures                   Json?     @map("pictures") @db.JsonB
+  amenities                  Json?     @map("amenities") @db.JsonB
+  additionalInfo             Json?     @map("additional_info") @db.JsonB
+  contact                    Json?     @map("contact") @db.JsonB
+  rooms                      Json?     @map("rooms") @db.JsonB
+  cleaningStatus             Json?     @map("cleaning_status") @db.JsonB
+  policies                   Json?     @map("policies") @db.JsonB
+  cancelPolicy               String?   @map("cancel_policy") @db.VarChar(255)
+  timezone                   String?   @map("timezone") @db.VarChar(255)
+  cancelPolicies             Json?     @map("cancel_policies") @db.JsonB
+  rawData                    Json?     @map("raw_data") @db.JsonB
+  createdAt                  DateTime  @default(now()) @map("created_at")
+  importedAt                 DateTime  @default(now()) @map("imported_at")
+  updatedAt                  DateTime  @default(now()) @updatedAt @map("updated_at")
+  pmsType                    String    @map("pms_type") @db.VarChar(100)
+  pmsPropertyId              String?   @map("pms_property_id") @db.VarChar(100)
+  factoryContract            String?   @map("factory_contract") @db.VarChar(255)
+  propertyContract           String?   @map("property_contract") @db.VarChar(255)
+  deployStatus               String?   @default("new") @map("deploy_status") @db.VarChar(100)
+  deployedAt                 DateTime? @map("deployed_at")
+  thumbnail                  String?   @map("thumbnail") @db.VarChar(255)
+  clientId                   String?   @map("client_id") @db.VarChar(100)
+  fiat                       Boolean   @default(false)
+  userFiat                   Boolean?  @map("user_fiat")
+  systemFiat                 Boolean?  @map("system_fiat")
+  crypto                     Boolean   @default(false)
+  userCrypto                 Boolean?  @map("user_crypto")
+  systemCrypto               Boolean?  @map("system_crypto")
+  publishedStatus            String    @default("inactive") @map("published_status") @db.VarChar(100)
+  userPublishedStatus        String?   @map("user_published_status") @db.VarChar(100)
+  manualStatus               String    @default("active") @map("manual_status")
+  paymentReceiverWallet      String?   @map("payment_receiver_wallet") @db.VarChar(255)
+  isDelegated                Boolean?  @default(true) @map("is_delegated")
+  markupPrice                Float?    @map("markup_price")
+  source                     String?   @map("source") @db.VarChar(100)
+  superhogKYGId              Int?      @map("superhog_KYG_id") @db.Integer
+  superhogProtectId          Int?      @map("superhog_protect_id") @db.Integer
+  superhogStatus             String?   @map("superhog_status") @db.VarChar(255)
+  livingrooms                Int?      @map("livingrooms") @db.Integer
+  kitchens                   Int?      @map("kitchens") @db.Integer
+  bathroomTypes              Json?     @map("bathroom_types") @db.JsonB
+  squareType                 String?   @map("square_type") @db.VarChar(50)
+  squareMeters               Float?    @map("square_meters")
+  provideUrl                 String?   @map("provide_url") @db.VarChar(500)
+  settingSteps               Int?      @map("setting_steps") @db.Integer
+  channel                    String?   @map("channel") @db.VarChar(100)
+  airbnbCancellationPolicies Json?     @map("airbnb_cancellation_policies") @db.JsonB
+  dota                       Json?     @map("dota") @db.JsonB
+
+  propertyType      PropertyTypes?     @relation(fields: [propertyTypeId], references: [id])
+  propertyRooms     PropertyRoom[]
+  propertyPrice     PropertyPrice?
+  propertyImages    PropertyImage[]
+  feeSettings       FeeSetting[]
+  taxSettings       TaxSetting[]
+  propertyContracts PropertyContract[]
+  PropertyState     PropertyState[]
+  PropertyReview    PropertyReview[]
+
+  @@unique([pmsType, pmsPropertyId])
+  @@index([userId, walletId, status])
+  @@index([factoryContract])
+  @@index([propertyContract])
+  @@index([deployStatus])
+  @@index([address])
+  @@index([source])
+  @@index([userId, pmsType, id])
+  @@map("property")
+}
+
+model PropertyContract {
+  id               Int       @id @default(autoincrement())
+  propertyId       Int       @map("property_id")
+  factoryContract  String?   @map("factory_contract") @db.VarChar(255)
+  propertyContract String?   @map("property_contract") @db.VarChar(255)
+  deployStatus     String?   @default("new") @map("deploy_status") @db.VarChar(100)
+  deployedAt       DateTime? @map("deployed_at")
+  networks         String?   @map("networks") @db.VarChar(100)
+  chainId          Int?      @map("chain_id") @db.Integer
+
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([propertyId, networks, chainId])
+  @@index([propertyId, deployStatus, networks, chainId])
+  @@map("property_contract")
+}
+
+model PropertyPrice {
+  id         Int      @id @default(autoincrement())
+  propertyId Int      @map("property_id")
+  currency   String   @map("currency") @db.VarChar(255)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
+  priceInUsd Decimal? @map("price_in_usd") @db.Decimal(19, 8)
+
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([propertyId])
+  @@index([priceInUsd])
+  @@map("property_price")
+}
+
+model PropertyImage {
+  id         Int      @id @default(autoincrement())
+  propertyId Int      @map("property_id")
+  caption    String?  @map("caption") @db.Text
+  url        String   @map("url") @db.VarChar(255)
+  sortOrder  Int?     @map("sort_order") @db.Integer
+  pmsImageId String?  @map("pms_image_id") @db.VarChar(100)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @updatedAt @map("updated_at")
+
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([propertyId, pmsImageId])
+  @@map("property_image")
+}
+
+model ContractFactory {
+  id        Int      @id @default(autoincrement())
+  address   String   @db.VarChar(255)
+  version   String   @db.VarChar(100)
+  isActive  Boolean  @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @map("updated_at")
+
+  @@map("contract_factory")
+}
+
+model PropertyImageTemplate {
+  id         Int      @id @default(autoincrement())
+  propertyId Int      @map("property_id")
+  rawUrl     String?  @map("raw_url")
+  url        String?  @map("url")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @default(now()) @map("updated_at")
+
+  @@unique([propertyId, rawUrl])
+  @@map("property_image_template")
+}
+
+model Heartbeat {
+  id Int      @id
+  ts DateTime @default(now()) @map("ts")
+
+  @@map("heartbeat")
+}
+
+model PropertyReview {
+  id             Int       @id @default(autoincrement())
+  clientId       String?   @map("client_id") @db.VarChar(1000)
+  reviewId       String    @map("review_id") @db.VarChar(1000)
+  channelId      String?   @map("channel_id") @db.VarChar(1000)
+  propertyId     Int       @map("property_id")
+  pmsListingId   String?   @map("pms_listing_id") @db.VarChar(1000)
+  pmsListingName String?   @map("pms_listing_name") @db.VarChar(1000)
+  type           String?   @db.VarChar(255)
+  pmsType        String?   @map("pms_type") @db.VarChar(255)
+  rating         Float     @map("rating")
+  reviewCategory Json?     @map("review_category")
+  publicReview   String?   @map("public_review") @db.VarChar(10000)
+  submittedAt    DateTime? @map("submitted_at")
+  guestName      String?   @map("guest_name") @db.VarChar(255)
+  channel        String?   @db.VarChar(255)
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @default(now()) @map("updated_at")
+  userId         String    @map("user_id") @db.Uuid
+  status         String    @map("status") @db.VarChar(255)
+
+  property Property @relation(fields: [propertyId], references: [id])
+
+  @@unique([propertyId, reviewId])
+  @@index([propertyId, status, rating, submittedAt, type])
+  @@map("property_review")
+}

@@ -1,0 +1,16 @@
+export default () => ({
+    port: parseInt(process.env.PORT, 10) || 3000,
+    jwtKey: process.env.JWT_KEY,
+    limitEmail: process.env.LIMIT_SEND_EMAIL,
+    mailChimpApiKey: process.env.MAIL_CHIMP_API_KEY,
+    internalApiKey: process.env.INTERNAL_API_KEY,
+    slackToken: process.env.SLACK_TOKEN,
+    integrationService: process.env.INTEGRATION_SERVICE,
+    paygateService: process.env.PAYGATE_SERVICE,
+    accountService: process.env.ACCOUNT_SERVICE,
+    emailService: process.env.EMAIL_SERVICE,
+    bucket: process.env.AWS_S3_BUCKET_NAME,
+    s3Id: process.env.S3_AWS_ACCESS_KEY_ID,
+    s3Key: process.env.S3_AWS_SECRET_ACCESS_KEY,
+    testWallet: process.env.TEST_WALLET,
+})
