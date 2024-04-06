@@ -12,7 +12,7 @@ import { json, urlencoded } from 'express'
 
 async function bootstrap() {
     await initEnv()
-    const app = await NestFactory.create(AppModule)
+    const app = await NestFactory.create(AppModule, { cors: true, })
     app.use(helmet())
     app.use(compression())
     app.use(json({ limit: '50mb' }))

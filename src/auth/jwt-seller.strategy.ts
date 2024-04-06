@@ -1,12 +1,11 @@
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { PassportStrategy } from '@nestjs/passport'
 import { Injectable, UnauthorizedException } from '@nestjs/common'
-import { plainToClass } from 'class-transformer'
 
 import { UserPayload } from './user.payload'
 
 @Injectable()
-export default class JwtHostOrReadStrategy extends PassportStrategy(Strategy, 'jwt-host-or-read') {
+export default class JwtSellerStrategy extends PassportStrategy(Strategy, 'jwt-seller') {
     constructor() {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -17,8 +16,9 @@ export default class JwtHostOrReadStrategy extends PassportStrategy(Strategy, 'j
 
     validate(userPayload: Record<string, any>): UserPayload {
         const scopes = userPayload.scopes
-        if ((scopes && Array.isArray(scopes) && scopes.includes('read_host_data')) || scopes.includes('host'))
-            return plainToClass(UserPayload, userPayload)
+        if (scopes && Array.isArray(scopes) && scopes.includes('seller')) return <UserPayload>userPayload
+        if (scopes && Array.isArray(scopes) && scopes.includes('read_seller_data'))
+            throw new UnauthorizedException('You cannot perform this action in view-only mode.')
         throw new UnauthorizedException()
     }
 }

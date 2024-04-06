@@ -1,11 +1,22 @@
-import { Controller, Get, Param, ParseIntPipe, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common'
-import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
+import {
+    Body,
+    Controller,
+    Get,
+    Param,
+    ParseIntPipe,
+    Post,
+    Query,
+    UploadedFile,
+    UseInterceptors,
+    UsePipes,
+    ValidationPipe,
+} from '@nestjs/common'
+import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
 import { BaseResponse } from '@src/common/responses/base.response'
-import { UserPayload } from '@src/auth/user.payload'
-import { AuthUser } from '@src//common/decorators/auth-user.decorator'
 import { Paging } from '@src/common/responses/paging'
-import { JwtHostOrReadGuard } from '@src/auth/guards/jwt-host-or-read.guard'
 import { ProductService } from '@src/product/product.service'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { UploadProductImagePipe } from '@src/common/transform/upload-image.pipe'
 
 @Controller({
     version: '1',
@@ -15,17 +26,14 @@ import { ProductService } from '@src/product/product.service'
 export class ProductController {
     constructor(private readonly productService: ProductService) {}
 
-    @Get('/seller')
+    @Get('')
     @UsePipes(new ValidationPipe({ transform: true }))
-    @UseGuards(JwtHostOrReadGuard)
-    @ApiBearerAuth()
     @ApiOkResponse({
-        description: 'Get All host properties',
+        description: 'Get All seller product',
         isArray: true,
     })
     @ApiOperation({ summary: 'Get properties by host' })
-    async getHostProperties(@AuthUser() user: UserPayload, @Query() queries): Promise<any> {
-        queries.userId = user.id
+    async getProperties(@Query() queries: any): Promise<any> {
         const { data, count } = await this.productService.getAllProduct(queries)
         return BaseResponse.ok(data, Paging.build(+queries.page, +queries.pageSize, count))
     }
@@ -33,7 +41,30 @@ export class ProductController {
     @Get('/:id')
     @ApiOkResponse({ description: 'Get detail product' })
     @ApiOperation({ summary: 'Get detail product' })
-    async getproduct(@Param('id', ParseIntPipe) id: number): Promise<any> {
+    async getProduct(@Param('id', ParseIntPipe) id: number): Promise<any> {
         return BaseResponse.ok(await this.productService.getProduct(id))
+    }
+
+    @Post('/:id/upload')
+    @UseInterceptors(FileInterceptor('file'))
+    @ApiOperation({ summary: '' })
+    async uploadPropertyImage(
+        @Param('id', ParseIntPipe) id: number,
+        @UploadedFile(UploadProductImagePipe)
+        image: Express.Multer.File,
+    ): Promise<any> {
+        return BaseResponse.ok(await this.productService.uploadImage(id, image))
+    }
+
+    @Post('')
+    @ApiOperation({ summary: '' })
+    async createProduct(@Body() body: any): Promise<any> {
+        return BaseResponse.ok(await this.productService.create(body))
+    }
+
+    @Post('/:id')
+    @ApiOperation({ summary: '' })
+    async update(@Body() body: any, @Param('id', ParseIntPipe) id: number): Promise<any> {
+        return BaseResponse.ok(await this.productService.update(id, body))
     }
 }

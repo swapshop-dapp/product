@@ -5,7 +5,7 @@ import { HealthModule } from '@src/health/health.module'
 import { PrismaModule } from '@src//common/connections/prisma.module'
 import configuration from '@config/configuration'
 import { AuthModule } from '@src/auth/auth.module'
-import { SlackModule } from '@src/slack/slack.module'
+import { ProductModule } from '@src/product/product.module'
 
 @Module({
     imports: [
@@ -19,7 +19,7 @@ import { SlackModule } from '@src/slack/slack.module'
         TerminusModule,
         HealthModule,
         AuthModule,
-        SlackModule,
+        ProductModule,
     ],
     controllers: [],
     providers: [],

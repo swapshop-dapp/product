@@ -10,6 +10,8 @@ export class DataTransformInterceptor<T> implements NestInterceptor {
             map((data) => {
                 if (data instanceof Object) {
                     if (data instanceof BaseResponse) {
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
                         return snakeCaseKeys(data, { deep: true })
                     } else {
                         return data

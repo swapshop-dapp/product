@@ -6,7 +6,7 @@ import { plainToClass } from 'class-transformer'
 import { UserPayload } from './user.payload'
 
 @Injectable()
-export default class JwtOpenapiStrategy extends PassportStrategy(Strategy, 'jwt-openapi') {
+export default class JwtSellerOrReadStrategy extends PassportStrategy(Strategy, 'jwt-seller-or-read') {
     constructor() {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -17,9 +17,8 @@ export default class JwtOpenapiStrategy extends PassportStrategy(Strategy, 'jwt-
 
     validate(userPayload: Record<string, any>): UserPayload {
         const scopes = userPayload.scopes
-        if (scopes && Array.isArray(scopes) && scopes.includes('openapi')) return plainToClass(UserPayload, userPayload)
-        if (scopes && Array.isArray(scopes) && scopes.includes('read_host_data'))
-            throw new UnauthorizedException('You cannot perform this action in view-only mode.')
+        if ((scopes && Array.isArray(scopes) && scopes.includes('read_seller_data')) || scopes.includes('seller'))
+            return plainToClass(UserPayload, userPayload)
         throw new UnauthorizedException()
     }
 }
