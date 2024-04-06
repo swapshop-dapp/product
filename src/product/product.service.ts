@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-import { PrismaService } from '@src/common/connections/prisma.service'
+// import { PrismaService } from '@src/common/connections/prisma.service'
 import { Utils } from '@src/utils/utils'
 import { ConfigService } from '@nestjs/config'
 import AWS from 'aws-sdk'
@@ -132,7 +132,7 @@ export class ProductService {
     private readonly productMinHeight: number = parseInt(this.configService.get('PRODUCT_IMAGE_MIN_HEIGHT') || '683')
 
     constructor(
-        private readonly prisma: PrismaService,
+        // private readonly prisma: PrismaService,
         private readonly configService: ConfigService,
     ) {}
 
@@ -187,21 +187,21 @@ export class ProductService {
         const dataUploaded = await s3.upload(params).promise()
         return `${this.configService.get('CDN_PREFIX')}/${dataUploaded.Key}`
     }
-
-    async create(data: any) {
-        return this.prisma.product.create({
-            data: {
-                ...data,
-            },
-        })
-    }
-
-    async update(id: number, data: any) {
-        return this.prisma.product.update({
-            where: { id },
-            data: {
-                ...data,
-            },
-        })
-    }
+    //
+    // async create(data: any) {
+    //     return this.prisma.product.create({
+    //         data: {
+    //             ...data,
+    //         },
+    //     })
+    // }
+    //
+    // async update(id: number, data: any) {
+    //     return this.prisma.product.update({
+    //         where: { id },
+    //         data: {
+    //             ...data,
+    //         },
+    //     })
+    // }
 }
