@@ -3,7 +3,6 @@ import { BadRequestException, ValidationPipe, VersioningType } from '@nestjs/com
 import helmet from 'helmet'
 import compression from 'compression'
 import { AppModule } from './app.module'
-import { PrismaService } from './common/connections/prisma.service'
 import { AllExceptionsFilter } from './common/filters/all-exception.filter'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { ConfigService } from '@nestjs/config'
@@ -39,9 +38,6 @@ async function bootstrap() {
         type: VersioningType.URI,
     })
 
-    const prismaService: PrismaService = app.get(PrismaService)
-
-    await prismaService.enableShutdownHooks(app)
     const config = app.get(ConfigService)
     if (process.env.ENV !== 'prod') {
         //Setup swagger
