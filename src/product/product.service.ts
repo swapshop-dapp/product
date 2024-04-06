@@ -187,21 +187,21 @@ export class ProductService {
         const dataUploaded = await s3.upload(params).promise()
         return `${this.configService.get('CDN_PREFIX')}/${dataUploaded.Key}`
     }
-    //
-    // async create(data: any) {
-    //     return this.prisma.product.create({
-    //         data: {
-    //             ...data,
-    //         },
-    //     })
-    // }
-    //
-    // async update(id: number, data: any) {
-    //     return this.prisma.product.update({
-    //         where: { id },
-    //         data: {
-    //             ...data,
-    //         },
-    //     })
-    // }
+
+    async create(data: any) {
+        // return this.prisma.product.create({
+        //     data: {
+        //         ...data,
+        //     },
+        // })
+    }
+
+    async update(id: number, data: any) {
+        // return this.prisma.product.update({
+        //     where: { id },
+        //     data: {
+        //         ...data,
+        //     },
+        // })
+    }
 }
