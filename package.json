@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "npm run prisma generate && nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
@@ -21,7 +21,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "start:cron-update-contact": "node dist/src/cronjobs/update-contact.cron",
-    "start:cron-sync-property-price": "node dist/src/cronjobs/sync-property-price.cron"
+    "start:cron-sync-property-price": "node dist/src/cronjobs/sync-property-price.cron",
+    "prisma": "./node_modules/.bin/prisma"
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.549.0",
