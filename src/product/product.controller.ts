@@ -12,11 +12,11 @@ import {
     ValidationPipe,
 } from '@nestjs/common'
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger'
-import { BaseResponse } from '@src/common/responses/base.response'
-import { Paging } from '@src/common/responses/paging'
-import { ProductService } from '@src/product/product.service'
+import { BaseResponse } from '../common/responses/base.response'
+import { Paging } from '../common/responses/paging'
+import { ProductService } from './product.service'
 import { FileInterceptor } from '@nestjs/platform-express'
-import { UploadProductImagePipe } from '@src/common/transform/upload-image.pipe'
+import { UploadProductImagePipe } from '../common/transform/upload-image.pipe'
 
 @Controller({
     version: '1',

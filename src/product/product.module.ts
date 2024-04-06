@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common'
-import { ProductService } from './product.service'
+import { ProductService } from '../product/product.service'
 import { HttpModule } from '@nestjs/axios'
 import { HttpclientModule } from '../shares/httpclient/httpclient.module'
-import { ProductController } from './product.controller'
+import { ProductController } from '../product/product.controller'
 
 @Module({
     imports: [

@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import { BaseClientService } from '@src/shares/httpclient/baseclient.service'
-import { SupportCryptoCurrencyEnum, SupportFiatCurrencyEnum } from '@src/constants/currency'
+import { BaseClientService } from './baseclient.service'
+import { SupportCryptoCurrencyEnum, SupportFiatCurrencyEnum } from '../../constants/currency'
 
 @Injectable()
 export default class PaygateClientService extends BaseClientService {

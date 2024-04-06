@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { TerminusModule } from '@nestjs/terminus'
-import { HealthModule } from '@src/health/health.module'
-// import { PrismaModule } from '@src//common/connections/prisma.module'
-import configuration from '@config/configuration'
-import { AuthModule } from '@src/auth/auth.module'
-import { ProductModule } from '@src/product/product.module'
+import { HealthModule } from './health/health.module'
+// import { PrismaModule } from './/common/connections/prisma.module'
+import configuration from '../config/configuration'
+import { AuthModule } from './auth/auth.module'
+import { ProductModule } from './product/product.module'
 
 @Module({
     imports: [

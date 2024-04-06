@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
-// import { PrismaService } from '@src/common/connections/prisma.service'
-import { Utils } from '@src/utils/utils'
+// import { PrismaService } from './common/connections/prisma.service'
+import { Utils } from '../utils/utils'
 import { ConfigService } from '@nestjs/config'
 import AWS from 'aws-sdk'
 import sharp from 'sharp'
