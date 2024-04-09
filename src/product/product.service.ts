@@ -17,7 +17,8 @@ const products = [
             'https://static.goswapshop.com/images/apple-watch.png',
             'https://static.goswapshop.com/images/apple-watch.png',
         ],
-        description: 'The most advanced Apple Watch features powerful health innovations like sensors and apps to measure your blood oxygen and take an ECG.',
+        description:
+            'The most advanced Apple Watch features powerful health innovations like sensors and apps to measure your blood oxygen and take an ECG.',
         price: 400,
     },
     // {
@@ -49,7 +50,8 @@ const products = [
             'https://static.goswapshop.com/images/apple-watch.png',
             'https://static.goswapshop.com/images/apple-watch.png',
         ],
-        description: ' Apple Watch Series 6 GPS + Cellular LTE Model lets you call, text, and get directions without your phone present. It offers multiple connectivity options, including: Bluetooth, Wi-Fi, NFC, and 4G LTE to suit your needs, whatever they might be',
+        description:
+            ' Apple Watch Series 6 GPS + Cellular LTE Model lets you call, text, and get directions without your phone present. It offers multiple connectivity options, including: Bluetooth, Wi-Fi, NFC, and 4G LTE to suit your needs, whatever they might be',
         price: 400,
     },
     {
@@ -60,12 +62,13 @@ const products = [
             'https://static.goswapshop.com/images/apple-ipad-2.jpg',
             'https://static.goswapshop.com/images/apple-ipad-3.jpg',
         ],
-        description: 'olorfully reimagined and more versatile than ever, iPad is great for the things you do every day. With an all-screen design, 10.9-inch Liquid Retina display, powerful A14 Bionic chip, superfast Wi-Fi, and four gorgeous colors, iPad delivers a powerful way to create, stay connected, and get things done.',
+        description:
+            'olorfully reimagined and more versatile than ever, iPad is great for the things you do every day. With an all-screen design, 10.9-inch Liquid Retina display, powerful A14 Bionic chip, superfast Wi-Fi, and four gorgeous colors, iPad delivers a powerful way to create, stay connected, and get things done.',
         price: 1000,
     },
     // {
     //     title: 'Iphone 11 Pro Max',
-        // images: ['https://static.goswapshop.com/images/iphone.jpg'],
+    // images: ['https://static.goswapshop.com/images/iphone.jpg'],
     //     description: 'The new Iphone 11 Pro Max with A13 chip',
     //     price: 200,
     // },
@@ -77,18 +80,20 @@ const products = [
             'https://static.goswapshop.com/images/apple-imac-2.webp',
             'https://static.goswapshop.com/images/apple-imac-3.png',
         ],
-        description: 'The all-in-one desktop design is strikingly thin, comes in four vibrant colors, and becomes the centerpiece of any room. Get more done faster with a next-generation chip from Apple. From creating presentations to gaming, you will fly through work and play',
+        description:
+            'The all-in-one desktop design is strikingly thin, comes in four vibrant colors, and becomes the centerpiece of any room. Get more done faster with a next-generation chip from Apple. From creating presentations to gaming, you will fly through work and play',
         price: 1000,
     },
     {
         id: 8,
         title: 'Apple Airpods Pro',
         images: [
-            'https://static.goswapshop.com/images/apple-airpods-pro-1.avif',
-            'https://static.goswapshop.com/images/apple-airpods-pro-2.jpg',
-            'https://static.goswapshop.com/images/apple-airpods-pro-3.webp',
+            'https://static.goswapshop.com/images/apple-airpords-pro-1.avif',
+            'https://static.goswapshop.com/images/apple-airpords-pro-2.jpg',
+            'https://static.goswapshop.com/images/apple-airpords-pro-3.webp',
         ],
-        description: 'The Apple-designed H2 chip helps to create more intelligent noise cancellation and deeply immersive sound. The low-distortion, custom-built driver delivers crisp, clear high notes and full, rich bass in stunning definition.',
+        description:
+            'The Apple-designed H2 chip helps to create more intelligent noise cancellation and deeply immersive sound. The low-distortion, custom-built driver delivers crisp, clear high notes and full, rich bass in stunning definition.',
         price: 400,
     },
     {
